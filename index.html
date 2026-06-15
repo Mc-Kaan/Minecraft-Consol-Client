@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC CONSOLE</title>
+    <style>
+        /* Modern, derin siyah ve minimal beyaz sokak tarzı */
+        body { 
+            background-color: #09090b; 
+            color: #fafafa; 
+            font-family: system-ui, -apple-system, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            letter-spacing: -0.5px;
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 60px auto; 
+            padding: 20px;
+        }
+        h1 { 
+            font-size: 32px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ffffff;
+            padding-bottom: 10px;
+        }
+        .box {
+            background-color: #141416;
+            border: 1px solid #27272a;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        .box h3 {
+            margin-top: 0;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+        .box p {
+            color: #a1a1aa;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 5px 0 15px 0;
+        }
+        .code-area { 
+            background-color: #000000; 
+            padding: 15px; 
+            border: 1px solid #27272a;
+            color: #ffffff; 
+            font-family: 'Courier New', monospace;
+            font-size: 13px; 
+            overflow-x: auto; 
+            margin-bottom: 15px;
+            border-radius: 2px;
+        }
+        .btn { 
+            color: #000000; 
+            background-color: #ffffff;
+            border: none; 
+            padding: 12px 24px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            transition: background 0.2s;
+        }
+        .btn:hover { 
+            background-color: #e4e4e7;
+        }
+        .btn.secondary {
+            background-color: transparent;
+            color: #ffffff;
+            border: 1px solid #27272a;
+            margin-right: 10px;
+        }
+        .btn.secondary:hover {
+            background-color: #27272a;
+        }
+        .zip-pass {
+            display: inline-block;
+            margin-left: 15px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #f43f5e;
+            vertical-align: middle;
+        }
+        .note {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #f43f5e;
+            font-weight: 600;
+        }
+        
+        .footer {
+            margin-top: 60px;
+            border-top: 1px solid #27272a;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            font-weight: 600;
+            color: #71717a;
+            text-transform: uppercase;
+        }
+        .footer span {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>MC CONSOLE</h1>
+
+        <!-- Node.js Gereksinimi -->
+        <div class="box" style="border-left: 3px solid #f43f5e;">
+            <h3>00 // GEREKSİNİM</h3>
+            <p>Kodun bilgisayarında çalışabilmesi için arkada Node.js motorunun kurulu olması şart. Eğer yüklü değilse aşağıdaki butondan kur, yüklüyse bu adımı geç.</p>
+            <a href="https://nodejs.org/" target="_blank" class="btn secondary">NODE.JS İNDİR</a>
+        </div>
+
+        <!-- Altyapı İndirme -->
+        <div class="box">
+            <h3>01 // ALTYAPI</h3>
+            <p>Mineflayer kütüphanesinin kurulu olduğu hazır klasörü sistemine çek.</p>
+            <a href="https://dosya.co/v50xj1l96gyz/mc-afk-client.zip.html" target="_blank" class="btn">KLASÖRÜ İNDİR (.ZIP)</a>
+            <span class="zip-pass">// ŞİFRE: 3142</span>
+        </div>
+
+        <!-- Çalıştırma -->
+        <div class="box">
+            <h3>02 // ÇALIŞTIRMA</h3>
+            <p>İndirdiğin klasörün içine gir. Üstteki dosya yolu çubuğuna 'cmd' yazıp Enter'a bas. Siyah ekran açılacak.</p>
+            <p>Aşağıdaki kodu kopyala ve açılan CMD ekranına sağ tıkla yapıştır:</p>
+            
+            <div class="code-area" id="codeBlock">node -e "const m=require('mineflayer'); const b=m.createBot({host:'sunucu ipsi',port:25565,username:'oyun ismin',version:'1.21.1'}); b.on('message',msg=>console.log(msg.toAnsi())); process.stdin.on('data',d=>b.chat(d.toString().trim()))"</div>
+            
+            <button class="btn" onclick="copyCode()">KODU KOPYALA</button>
+
+            <div class="note">
+                * ENTER'A BASMADAN ÖNCE: Kodun içindeki usernameden sonraki 'oyun ismin' yerini ve host yerinden sonraki 'sunucu ipsi' yazan yeri kendi gireceğin sunucu ipsini yaz , sonra ateşle.
+            </div>
+        </div>
+
+        <!-- İmza -->
+        <div class="footer">
+            <div>BY: <span>Kaan</span></div>
+            <div>DISCORD: <span>pasha_kaan</span></div>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            var codeText = document.getElementById("codeBlock").innerText;
+            navigator.clipboard.writeText(codeText).then(function() {
+                alert("KOPYALANDI.");
+            });
+        }
+    </script>
+
+</body>
+</html>
